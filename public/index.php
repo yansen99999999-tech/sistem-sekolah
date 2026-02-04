@@ -6,7 +6,7 @@ use App\Core\Router;
 $router =  new Router();
 $router->add('GET','/students','StudentControllers','index');
 $router->add('GET','/students/create','StudentControllers','create');
-$router->add('GET','/students/create','StudentControllers','create');
+$router->add('GET','/students/{id}','StudentControllers','create');
 
 $router->run();
 ?>

@@ -24,13 +24,23 @@ class Router
 
 
 foreach($this->routes as $route){
-    
+    $pattern = str_replace(
+        '{id}',
+        '([0-9]+)',
+        $route['uri'],
+    );
+    $pattern = '#^' . $pattern . '#^';
+
+    if(preg_match($pattern,$uri,$matches))
 }
 
         if ($method == 'GET' && $uri == '/students'){
-           require_once './app /controllers/StudentControllers.php';
-           $controller = new StudentsController();
-           $controller -> index();
+           require_once './app /controllers/StudentControllers/' . $route['controller'] '.php';
+           $controllerClass ='App\\Controllers\\'. $route['controller'];
+           $controller = new $controllerClass();
+           $function = $route['function'];
+
+            call_user_func_array([$controller,$function],$matches);
             return;
         }
 
